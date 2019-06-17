@@ -1,6 +1,5 @@
 #ifndef KB_H
 #define KB_H
-
 #include "quantum.h"
 
 #define KEYMAP( \
@@ -16,5 +15,4 @@
 	{ K300,  K301,  K302,  K303,  K304,  K305,  K306,  K307,  K308,  K309,  K310, K311, KC_NO,  K313,  K314 }, \
 	{ K400,  K401,  KC_NO, K403,  K404,  KC_NO, K406,  KC_NO, K408,  KC_NO, K410,  K411,  K412,  K413,  K414 }  \
 }
-
 #endif

@@ -27,27 +27,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_FN] = KEYMAP(
 		KC_GRV, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, RGB_TOG, RGB_TOG,
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PSCR, KC_SLCK, KC_TRNS, RGB_VAD, RGB_VAI, RGB_SAD, RGB_SAI,
+		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PSCR, KC_SLCK, KC_BRK, KC_TRNS, KC_TRNS, KC_TRNS, RESET,
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INS, KC_HOME, KC_PGUP, KC_VOLD, KC_VOLU, KC_TRNS,
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_END, KC_PGDN, KC_TRNS, KC_TRNS, KC_DEL,
-		RESET, KC_TRNS, KC_RALT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS)
-
+		KC_TRNS, KC_RGUI, KC_RALT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS)
 };
-
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
-
-
-	switch (id) {
-
-	}
-	return MACRO_NONE;
-}
-
-void matrix_init_user(void) {
-}
-
-void matrix_scan_user(void) {
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
@@ -58,7 +42,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
         default:
             if(user_config.capslock_change) {
-                rgblight_setrgb(RGB_CORAL);
+                rgblight_setrgb(RGB_PURPLE);
             } else {
                 rgblight_setrgb(RED, GREEN, BLUE);
             }
@@ -76,41 +60,6 @@ void eeconfig_init_user(void) {
     user_config.raw = 0;
     user_config.capslock_change = false;
     eeconfig_update_user(user_config.raw);
-}
-
-void led_set_user(uint8_t usb_led) {
-
-	if (usb_led & (1 << USB_LED_NUM_LOCK)) {
-
-	} else {
-
-	}
-
-	if (usb_led & (1 << USB_LED_CAPS_LOCK)) {
-		DDRB |= (1 << 2); PORTB &= ~(1 << 2);
-
-	} else {
-		DDRB &= ~(1 << 2); PORTB &= ~(1 << 2);
-	}
-
-	if (usb_led & (1 << USB_LED_SCROLL_LOCK)) {
-
-	} else {
-
-	}
-
-	if (usb_led & (1 << USB_LED_COMPOSE)) {
-
-	} else {
-
-	}
-
-	if (usb_led & (1 << USB_LED_KANA)) {
-
-	} else {
-
-	}
-
 }
 
 uint32_t layer_state_set_user(uint32_t state) {
