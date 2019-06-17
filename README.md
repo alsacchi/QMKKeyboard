@@ -1,5 +1,10 @@
 # QMK Custom layout for my personal keyboard
-
+## Keyboard DETAILS
+* DZ60 60% Keyboard
+* 5 ROWS
+* 15 COLS
+* Diode direction COL 2 ROW
+* RGB Underglow
 This repo contains my custom layout and keymaps for my custom mechanical keyboard.
 
 | Layout 1 | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY |
