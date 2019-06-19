@@ -15,7 +15,7 @@ typedef union {
 } user_config_t;
 
 user_config_t user_config;
-
+void checkMode(void);
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_BL] = KEYMAP(
@@ -38,21 +38,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_CAPS:
             if(record->event.pressed) {
                 user_config.capslock_change ^= 1;
+                checkMode();
                 eeconfig_update_user(user_config.raw);
             }
-        default:
-            if(user_config.capslock_change) {
-                rgblight_setrgb(RGB_PURPLE);
-            } else {
-                rgblight_setrgb(RED, GREEN, BLUE);
-            }
+            default:
+                if(!user_config.capslock_change) {
+                    rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+                    rgblight_setrgb(RED, GREEN, BLUE);
+                }
             break;
     }
 	return true;
 }
+void checkMode(void) {
+    if(user_config.capslock_change) {
+        rgblight_mode(RGBLIGHT_MODE_BREATHING + 3);
+    } else {
+        rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+        rgblight_setrgb(RGB_RED);
+    }
+}
 void keyboard_post_init_user(void) {
+    rgblight_enable();
     rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
-    rgblight_setrgb(RED, GREEN, BLUE);
+    rgblight_setrgb(RGB_RED);
     user_config.raw = eeconfig_read_user();
 }
 
@@ -65,11 +74,12 @@ void eeconfig_init_user(void) {
 uint32_t layer_state_set_user(uint32_t state) {
     switch(biton32(state)) {
         case _FN:
-            rgblight_setrgb(170, 0, 255);
-            break;
+            rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+            rgblight_setrgb(RGB_BLUE);
+        break;
         default:
-            rgblight_setrgb(RED, GREEN, BLUE);
-			break;
+            checkMode();
+        break;
     }
     return state;
 }
