@@ -2,10 +2,6 @@
 //Layer names
 #define _BL 0
 #define _FN 1
-//Default colors
-#define RED 255
-#define GREEN 0
-#define BLUE 0
 
 typedef union {
   uint32_t raw;
@@ -41,12 +37,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 checkMode();
                 eeconfig_update_user(user_config.raw);
             }
-            default:
-                if(!user_config.capslock_change) {
-                    rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
-                    rgblight_setrgb(RED, GREEN, BLUE);
-                }
-            break;
+        break;
     }
 	return true;
 }
