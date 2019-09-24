@@ -43,7 +43,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 void checkMode(void) {
     if(user_config.capslock_change) {
-        rgblight_mode(RGBLIGHT_MODE_BREATHING + 3);
+        rgblight_mode(RGBLIGHT_MODE_RAINBOW_MOOD + 2);
     } else {
         rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
         rgblight_setrgb(RGB_RED);
@@ -65,8 +65,8 @@ void eeconfig_init_user(void) {
 uint32_t layer_state_set_user(uint32_t state) {
     switch(biton32(state)) {
         case _FN:
-            rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
-            rgblight_setrgb(RGB_BLUE);
+            rgblight_mode(RGBLIGHT_MODE_CHRISTMAS);
+            rgblight_setrgb(RGB_GREEN);
         break;
         default:
             checkMode();
